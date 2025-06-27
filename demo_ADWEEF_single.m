@@ -24,6 +24,19 @@ cutoff_freq = 0.8;
 % Plot results
 figure;
 subplot(2,1,1);
+plot(wl_671, signal_671, 'r', 'LineWidth', 1.5);
+xlabel('Wavelength (nm)'); ylabel('Intensity');
+xlim([2800 3800]);
+title('Raw Signal - 671 nm');
+
+subplot(2,1,2);
+plot(wl_785, signal_785, 'b', 'LineWidth', 1.5);
+xlabel('Wavelength (nm)'); ylabel('Intensity');
+xlim([400 1800]);
+title('Raw Signal - 785 nm');
+
+figure;
+subplot(2,1,1);
 plot(wl_671, recon_671, 'r', 'LineWidth', 1.5);
 xlabel('Wavelength (nm)'); ylabel('Intensity');
 xlim([2800 3800]);
