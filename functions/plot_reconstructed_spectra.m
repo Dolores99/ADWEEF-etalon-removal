@@ -12,13 +12,13 @@ function plot_reconstructed_spectra(recon_671, recon_785, wl_671, wl_785, depth_
     colors = {'#0072BD','#EDB120','#77AC30','#A2142F','#7E2F8E','#D95319'};
 
     %% Plot 785 nm spectra
-    ax1 = axes('Parent',figure2,'Position',[0.13 0.11 0.368125 0.815]);
-    hold(ax1, 'on');
+    axes1 = axes('Parent',figure2,'Position',[0.13 0.11 0.368125 0.815]);
+    hold(axes1, 'on');
     for d = depth_start:(depth_start + 5)
         plot(wl_785, recon_785(d,:) + (d - depth_start) * 3000, 'Color', colors{d - depth_start + 1}, 'LineWidth', 2);
     end
     xlim([600 1800]);
-    set(ax1, 'XTick', 600:200:2000, 'YTick', []);
+    set(axes1, 'XTick', 600:200:2000, 'YTick', []);
     yticklabels([]);
     % 去掉右边框，但保留上侧框线
     set(axes1, 'Box', 'off');  % 关闭默认的边框
@@ -39,14 +39,14 @@ function plot_reconstructed_spectra(recon_671, recon_785, wl_671, wl_785, depth_
     hold off;
 
     %% Plot 671 nm spectra
-    ax2 = axes('Parent',figure2,...
+    axes2 = axes('Parent',figure2,...
     'Position',[0.520340909090909 0.11 0.29 0.815]);
-    hold(ax2, 'on');
+    hold(axes2, 'on');
     for d = depth_start:(depth_start + 5)
         plot(wl_671, recon_671(d,:) + (d - depth_start) * 3000, 'Color', colors{d - depth_start + 1}, 'LineWidth', 2);
     end
     xlim([2800 3800]);
-    set(ax2, 'XTick', [2800 3000 3200 3400 3600 3800]);
+    set(axes2, 'XTick', [2800 3000 3200 3400 3600 3800]);
     yl = ylim;
 
     % 设置 Y 轴的最小值，并保持最大值自动调整
