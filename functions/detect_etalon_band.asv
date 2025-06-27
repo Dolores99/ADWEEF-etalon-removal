@@ -1,4 +1,4 @@
-function filled_final = detect_etalon_band(wt_671, f_671, wt_785, f_785, wl, f_axis, loop_times, visible)
+function filled_final = detect_etalon_band(wt_671, f_671, wt_785, f_785, wl, f_axis, loop_times, visiable)
 % DETECT_ETALON_BAND Detect etalon fringe band from wavelet spectra
 %
 %   filled_final = detect_etalon_band(wt_671, wt_785, wl, f_axis, loop_times)
@@ -16,10 +16,6 @@ function filled_final = detect_etalon_band(wt_671, f_671, wt_785, f_785, wl, f_a
 %   Output:
 %       filled_final - Binary mask (freq x wl) indicating etalon band region
     
-    if nargin < 8
-        visible = false;  % 设置默认值
-    end
-
     % Normalize wavelet coefficients
     gray_671 = abs(wt_671) / max(abs(wt_671(:)));
     gray_785 = abs(wt_785) / max(abs(wt_785(:)));
@@ -41,48 +37,46 @@ function filled_final = detect_etalon_band(wt_671, f_671, wt_785, f_785, wl, f_a
     edges_785 = edge(gray_785, 'Canny', can_785);
 
     %% Visulization
-    if visible
-        figure;
-        subplot(2,2,2);
-        % imshow(edges_671);
-        surface(wl,f_671,edges_671);
-        shading interp;
-        ylim([0 1]);
-        xlim([810 960]);
-        colorbar;
-        colormap(gca,'Gray');
-        title('Edge of Frequency-Wavelength spectrum (671nm)')
-    
-        subplot(2,2,1);
-        surface(wl,f_671,gray_671);
-        shading interp;
-        ylim([0 1]);
-        xlim([810 960]);
-        colorbar;
-        colormap(gca,'jet');
-        caxis([0 0.05]);
-        title('Frequency-Wavelength spectrum of etalon ic (671 nm)')
-    
-        subplot(2,2,4);
-        % imshow(edges_671);
-        surface(wl,f_785,edges_785);
-        shading interp;
-        ylim([0 1]);
-        xlim([810 960]);
-        colorbar;
-        colormap(gca,'Gray');
-        title('Edge of Frequency-Wavelength spectrum (785nm)')
-    
-        subplot(2,2,3);
-        surface(wl,f_785,gray_785);
-        shading interp;
-        ylim([0 1]);
-        xlim([810 960]);
-        colorbar;
-        colormap(gca,'jet');
-        caxis([0 0.05]);
-        title('Frequency-Wavelength spectrum of etalon ic (785 nm)')
-    end
+    figure;
+    subplot(2,2,2);
+    % imshow(edges_671);
+    surface(wl,f_671,edges_671);
+    shading interp;
+    ylim([0 1]);
+    xlim([810 960]);
+    colorbar;
+    colormap(gca,'Gray');
+    title('Edge of Frequency-Wavelength spectrum (671nm)')
+
+    subplot(2,2,1);
+    surface(wl,f_671,gray_671);
+    shading interp;
+    ylim([0 1]);
+    xlim([810 960]);
+    colorbar;
+    colormap(gca,'jet');
+    caxis([0 0.05]);
+    title('Frequency-Wavelength spectrum of etalon ic (671 nm)')
+
+    subplot(2,2,4);
+    % imshow(edges_671);
+    surface(wl,f_785,edges_785);
+    shading interp;
+    ylim([0 1]);
+    xlim([810 960]);
+    colorbar;
+    colormap(gca,'Gray');
+    title('Edge of Frequency-Wavelength spectrum (785nm)')
+
+    subplot(2,2,3);
+    surface(wl,f_785,gray_785);
+    shading interp;
+    ylim([0 1]);
+    xlim([810 960]);
+    colorbar;
+    colormap(gca,'jet');
+    caxis([0 0.05]);
+    title('Frequency-Wavelength spectrum of etalon ic (785 nm)')
 %%
 
     % Cross-correlation of edge maps
@@ -142,30 +136,28 @@ function filled_final = detect_etalon_band(wt_671, f_671, wt_785, f_785, wl, f_a
     mask(f_max_pos:f_min_pos, w_min_pos:w_max_pos) = 1;
     C_cleaned = C .* mask;
     %%
-    if visible
-        figure;
-        subplot(1,2,1);
-        surface(wl,f_785,C);
-        shading interp;
-        ylim([0 1]);
-        xlim([810 960]);
-        colormap(gray);
-        colorbar;
-        xlabel('Wavelength (nm)');
-        ylabel('Frequency');
-        title('XCorr of noise content t-f');
-    
-        subplot(1,2,2);
-        surface(wl,f_785,C_cleaned);
-        shading interp;
-        ylim([0 1]);
-        xlim([810 960]);
-        colormap(gray);
-        colorbar;
-        xlabel('Wavelength (nm)');
-        ylabel('Frequency');
-        title('XCorr of noise content t-f')
-    end
+    figure;
+    subplot(1,2,1);
+    surface(wl,f_785,C);
+    shading interp;
+    ylim([0 1]);
+    xlim([810 960]);
+    colormap(gray);
+    colorbar;
+    xlabel('Wavelength (nm)');
+    ylabel('Frequency');
+    title('XCorr of noise content t-f');
+
+    subplot(1,2,2);
+    surface(wl,f_785,C_cleaned);
+    shading interp;
+    ylim([0 1]);
+    xlim([810 960]);
+    colormap(gray);
+    colorbar;
+    xlabel('Wavelength (nm)');
+    ylabel('Frequency');
+    title('XCorr of noise content t-f')
     
     %% Extract top and bottom boundary
     [height, width] = size(C_cleaned);
@@ -253,53 +245,51 @@ function filled_final = detect_etalon_band(wt_671, f_671, wt_785, f_785, wl, f_a
     end
 
     %%
-    if visible
-        figure;
-        subplot(2, 2, 1);
-        surface(wl,f_785,C_cleaned);
-        shading interp;
-        ylim([0 1]);
-        xlim([810 960]);
-        colormap(gray);
-        colorbar;
-        xlabel('Wavelength (nm)');
-        ylabel('Frequency');
-        title('Original Binary Image');
-    
-        subplot(2, 2, 2);
-        surface(wl,f_785,filled_img_top);
-        shading interp;
-        ylim([0 1]);
-        xlim([810 960]);
-        colormap(gray);
-        colorbar;
-        xlabel('Wavelength (nm)');
-        ylabel('Frequency');
-        title('Top Boundary Line');
-    
-        subplot(2, 2, 3);
-        surface(wl,f_785,filled_img_bottom);
-        shading interp;
-        ylim([0 1]);
-        xlim([810 960]);
-        colormap(gray);
-        colorbar;
-        xlabel('Wavelength (nm)');
-        ylabel('Frequency');
-        title('Bottom Boundary Line');
-    
-        subplot(2, 2, 4);
-        surface(wl,f_785,filled_final);
-        shading interp;
-        ylim([0 1]);
-        xlim([810 960]);
-        colormap(gray);
-        colorbar;
-        caxis([0 1]);
-        xlabel('Wavelength (nm)');
-        ylabel('Frequency');
-        title('Wavelet Coefficient Mask');%% Reconstruct the noise by selecting valid frequency band
-    end
+    figure;
+    subplot(2, 2, 1);
+    surface(wl,f_785,C_cleaned);
+    shading interp;
+    ylim([0 1]);
+    xlim([810 960]);
+    colormap(gray);
+    colorbar;
+    xlabel('Wavelength (nm)');
+    ylabel('Frequency');
+    title('Original Binary Image');
+
+    subplot(2, 2, 2);
+    surface(wl,f_785,filled_img_top);
+    shading interp;
+    ylim([0 1]);
+    xlim([810 960]);
+    colormap(gray);
+    colorbar;
+    xlabel('Wavelength (nm)');
+    ylabel('Frequency');
+    title('Top Boundary Line');
+
+    subplot(2, 2, 3);
+    surface(wl,f_785,filled_img_bottom);
+    shading interp;
+    ylim([0 1]);
+    xlim([810 960]);
+    colormap(gray);
+    colorbar;
+    xlabel('Wavelength (nm)');
+    ylabel('Frequency');
+    title('Bottom Boundary Line');
+
+    subplot(2, 2, 4);
+    surface(wl,f_785,filled_final);
+    shading interp;
+    ylim([0 1]);
+    xlim([810 960]);
+    colormap(gray);
+    colorbar;
+    caxis([0 1]);
+    xlabel('Wavelength (nm)');
+    ylabel('Frequency');
+    title('Wavelet Coefficient Mask');%% Reconstruct the noise by selecting valid frequency band
 %%
 
 end
