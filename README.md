@@ -1,33 +1,75 @@
 # ADWEEF: Automated Dual-Wavelength Etalon Elimination Framework
 
-A fully automated algorithm for removing Etalon fringes in dual-wavelength Raman spectroscopy systems, specifically tailored for BI-CCD-based detectors. This method enables robust fringe suppression without the need for manual parameter tuning or prior modeling, and is highly suitable for physiological and biomedical Raman applications such as skin analysis.
+This repository contains MATLAB code for **ADWEEF**, a fully automated signal processing framework designed to suppress etalon fringes in dual-wavelength Raman spectroscopy, particularly for biomedical applications (e.g., skin analysis).
+
+> **Status**: This work is currently under review at *Analytical Chemistry* (ACS).
 
 ---
 
-## 🔍 About
+## 🔍 Highlights
 
-This repository provides the official implementation of **ADWEEF**, the algorithm proposed in our manuscript currently **under review at _Analytical Chemistry_ (ACS)**.
-
-The method is designed for use with dual-wavelength Raman systems and leverages the correlation of fringe patterns across wavelengths to remove Etalon noise in an unsupervised and automated manner.
-
----
-
-## 🛠 Files
-
-- `main.m` – Core MATLAB implementation of the ADWEEF algorithm  
-- `example_data.mat` – Sample synthetic dual-wavelength Raman data  
-- `demo_ADWEEF.m` – Example usage script to run the algorithm  
-- `LICENSE.txt` – License (academic use only)  
-- `README.md` – Project documentation  
+- Fully automated pipeline, no manual parameter tuning required
+- Supports both multi-depth and single-point Raman datasets
+- Etalon fringe detection via wavelet transform and statistical masking
+- Two reconstruction approaches:
+  - Frequency-domain denoising using Continuous Wavelet Transform (CWT)
+  - Direct subtraction-based correction
+- Optimized for dual-wavelength Raman systems (e.g., 671 nm and 785 nm excitation)
 
 ---
 
-## 🚀 Getting Started
+## 📁 Project Structure
 
-1. Clone or download this repository  
-2. Open `demo_ADWEEF.m` in MATLAB  
-3. Run the script to see the algorithm applied on example data  
-4. Replace `example_data.mat` with your own data to test the method
+```
+ADWEEF/
+│
+├── data/                          # Sample datasets
+│   ├── example_multiple_671.mat   # Multi-depth spectra (671 nm)
+│   ├── example_multiple_785.mat   # Multi-depth spectra (785 nm)
+│   ├── example_single_671.mat     # Single-depth spectrum (671 nm)
+│   ├── example_single_785.mat     # Single-depth spectrum (785 nm)
+│   ├── wl.mat                     # Shared wavelength axis
+│   ├── wl_671.mat                 # Wavelengths for 671 nm
+│   └── wl_785.mat                 # Wavelengths for 785 nm
+│
+├── functions/                     # Core processing functions
+│   └── *.m                        # Includes wavelet filtering, boundary detection, ICA, visualization, etc.
+│
+├── main_ADWEEF_multiple.m         # Main script for multi-depth spectra (CWT-based method)
+├── main_ADWEEF_single.m           # Main script for single-depth spectra (subtraction-based method)
+│
+├── demo_ADWEEF_multiple.m         # Demonstration script for multi-depth input
+├── demo_ADWEEF_single.m           # Demonstration script for single-depth input
+│
+├── LICENSE.txt                    # Custom academic license (non-commercial use only)
+└── README.md                      # This documentation
+```
+
+---
+
+## ▶️ Quick Start
+
+```matlab
+% Example: Run demo for multi-depth spectra
+>> demo_ADWEEF_multiple
+
+% Example: Run demo for single-depth signal
+>> demo_ADWEEF_single
+```
+
+Make sure the required `.mat` files are in the `/data` folder.
+
+---
+
+## 📌 Dependencies
+- MATLAB R2024a or newer
+- Signal Processing Toolbox
+- Wavelet Toolbox
+- 200 colormap
+- Bioinformatics Toolbox
+- Curve Fitting Toolbox
+- Image Processing Toolbox
+- Time-reassigned Multisynchrosqueezing Transform
 
 ---
 
@@ -47,3 +89,7 @@ If you use this code or build upon it, please cite our work as:
 > Wenyi Xu, Renzhe Bi, Yi Qi, Ruochong Zhang, Poongkulali Rajarahm, Alicia Yap Ann May, Dinish U.S, Qian Cheng, Steven Tien Guan Thng, Malini Olivo. _ADWEEF: Automated Dual-Wavelength Etalon Elimination Framework for Raman Spectroscopy_, under review at _Analytical Chemistry_, 2025.
 
 Once the article is accepted, we will update this section with the DOI and full citation.
+
+---
+
+Thank you for using **ADWEEF**!
