@@ -1,4 +1,4 @@
-# ADWEEF: Automated Dual-Wavelength Etalon Elimination Framework
+# ADWEEF: Automated Dual-Wavelength Raman Spectroscopy Etalon Elimination Framework
 
 This repository contains MATLAB code for **ADWEEF**, a fully automated signal processing framework designed to suppress etalon fringes in dual-wavelength Raman spectroscopy, particularly for biomedical applications (e.g., skin analysis).
 
