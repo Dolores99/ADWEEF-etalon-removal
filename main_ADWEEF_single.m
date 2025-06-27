@@ -1,4 +1,4 @@
-function [recon_671, recon_785] = main_ADWEEF_single(csv_path, wl_671, wl_785, wl_all, loop_num, cutoff_freq)
+function [recon_671, recon_785] = main_ADWEEF_single(signal_671, signal_785, wl, loop_num, cutoff_freq)
 % MAIN_SUBTRACTION_SINGLE  Etalon removal by direct subtraction (no ICA), single-depth spectra
 %
 % Inputs:
@@ -12,15 +12,10 @@ function [recon_671, recon_785] = main_ADWEEF_single(csv_path, wl_671, wl_785, w
 %   recon_671 - reconstructed signal (1 x N)
 %   recon_785 - reconstructed signal (1 x N)
 
-    %% Load single-depth data
-    data = readmatrix(csv_path);
-    wl = data(1, :);
-    signal_671 = data(4, :);
-    signal_785 = data(5, :);
-
-    % For consistency with multi-depth code, wrap into (1 x N)
-    dataset671 = signal_671;
-    dataset785 = signal_785;
+    
+    %% For consistency with multi-depth code, wrap into (1 x N)
+    dataset671 = normalize_signal(signal_671');
+    dataset785 = normalize_signal(signal_785');
 
     %% Iterative subtraction
     for loop_times = 1:loop_num
@@ -30,14 +25,21 @@ function [recon_671, recon_785] = main_ADWEEF_single(csv_path, wl_671, wl_785, w
         [wt_785, f_785] = cwt(dataset785, 'amor', fs);
 
         % Build mask via CWT cross-spectrum
-        filled_final = build_mask_from_cross_cwt(wt_671, wt_785, f_671, wl);
+        filled_final = detect_etalon_band(wt_671, f_671, wt_785, f_785, wl, f_671, loop_times);
+        if isempty(filled_final)
+            break;  % 提前结束循环
+        end
+
+        % Reconstruct Etalon
+        etlon_recon_671(loop_times,:) = reconstruct_etalon(wt_671, filled_final, dataset671);
+        etlon_recon_785(loop_times,:) = reconstruct_etalon(wt_785, filled_final, dataset785);
 
         % Reconstruct via subtraction (add or subtract depending on std)
-        recon_671 = reconstruct_by_subtraction(dataset671, filled_final, wl);
-        recon_785 = reconstruct_by_subtraction(dataset785, filled_final, wl);
+        recon_671 = reconstruct_by_subtraction(dataset671', etlon_recon_671(loop_times,:), wl);
+        recon_785 = reconstruct_by_subtraction(dataset785', etlon_recon_785(loop_times,:), wl);
 
-        dataset671 = recon_671;
-        dataset785 = recon_785;
+        dataset671 = recon_671';
+        dataset785 = recon_785';
     end
 
     %% Final low-pass Fourier filtering
