@@ -1,6 +1,6 @@
 Academic Non-Commercial License
 
-Copyright (c) 2025 [Wenyi Xu / Agency for Science, Technology and Research]
+Copyright (c) 2025 [Agency for Science, Technology and Research]
 
 This software is provided for academic research and non-commercial use only. 
 Users are permitted to use, copy, modify, and distribute this code for 
@@ -17,4 +17,4 @@ including but not limited to the warranties of merchantability, fitness for a pa
 purpose, and noninfringement. In no event shall the authors be liable for any claim, 
 damages, or other liability arising from the use of this software.
 
-For licensing inquiries, please contact: [xu.wenyi9942@gmail.com]
+For licensing inquiries, please contact: [Malini_Olivo@asrl.a-star.edu.sg]
