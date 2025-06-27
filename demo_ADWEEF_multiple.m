@@ -26,5 +26,7 @@ cutoff_freq = 0.8;    % Cutoff frequency for final Fourier filter
 
 %% Plot results for selected depth range
 depth_start = 6;  % You may change this depending on your data
+disp('Plotting raw spectra');
+plot_reconstructed_spectra(new_dataset671, new_dataset785, wl_671, wl_785, depth_start);
 disp('Plotting reconstructed spectra');
 plot_reconstructed_spectra(recon_671, recon_785, wl_671, wl_785, depth_start);
