@@ -37,6 +37,7 @@ ADWEEF/
 │
 ├── main_ADWEEF_multiple.m         # Main script for multi-depth spectra (CWT-based method)
 ├── main_ADWEEF_single.m           # Main script for single-depth spectra (subtraction-based method)
+├── EtalonMaskApp.m                # GUI for single-wavelength excitation spectra (subtraction-based method)
 │
 ├── demo_ADWEEF_multiple.m         # Demonstration script for multi-depth input
 ├── demo_ADWEEF_single.m           # Demonstration script for single-depth input
