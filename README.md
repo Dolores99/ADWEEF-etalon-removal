@@ -87,10 +87,8 @@ See [LICENSE.txt](./LICENSE.txt) for full terms.
 
 If you use this code or build upon it, please cite our work as:
 
-> Wenyi Xu, Renzhe Bi, Yi Qi, Ruochong Zhang, Poongkulali Rajarahm, Alicia Yap Ann May, Dinish U.S, Qian Cheng, Steven Tien Guan Thng, Malini Olivo. _ADWEEF: Automated Dual-Wavelength Etalon Elimination Framework for Raman Spectroscopy_, under review at _Analytical Chemistry_, 2025.
-
-Once the article is accepted, we will update this section with the DOI and full citation.
-
+> Wenyi Xu, Renzhe Bi, Yi Qi, Ruochong Zhang, Poongkulali Rajarahm, Alicia Yap Ann May, Dinish U.S, Qian Cheng, Steven Tien Guan Thng, Malini Olivo. _ADWEEF: Automated Dual-Wavelength Etalon Elimination Framework for Raman Spectroscopy_, _Analytical Chemistry_, 2025.
+DOI: 10.1021/acs.analchem.5c00747
 ---
 
 Thank you for using **ADWEEF**!
