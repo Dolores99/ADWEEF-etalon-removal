@@ -2,7 +2,7 @@
 
 This repository contains MATLAB code for **ADWEEF**, a fully automated signal processing framework designed to suppress etalon fringes in dual-wavelength Raman spectroscopy, particularly for biomedical applications (e.g., skin analysis).
 
-> **Status**: This work is currently under review at *Analytical Chemistry* (ACS).
+> **Status**: This work is currently published at *Analytical Chemistry* (ACS). https://doi.org/10.1021/acs.analchem.5c00747. 
 
 ---
 
